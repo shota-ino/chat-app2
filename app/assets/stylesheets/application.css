@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ /* 表示が崩れてしまわなくなる */
+ /* 要素のボックスサイズにpaddingとborderを含めるように */
+ * {
+  box-sizing: border-box;
+}
+/* 「*」というセレクターは、すべての要素に適用させる */
