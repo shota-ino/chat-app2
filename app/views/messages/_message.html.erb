@@ -9,7 +9,10 @@
       <!-- 投稿した時刻を出力する -->
       <%# messagesテーブルのcreated_atカラムから、投稿した時刻を取得 %>
       <%# ただし、現段階では日本基準の時刻ではない %>
-      <%= message.created_at %>
+      <%# <%= message.created_at %>
+
+      <%# 国や地域によって時刻は異なりますが、lメソッドを使えば指定した現地時間に対応 %>
+      <%= l message.created_at %>
     </div>
   </div>
   <div class="lower-message">

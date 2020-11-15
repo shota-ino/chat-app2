@@ -1,3 +1,5 @@
+# そのRailsアプリケーションの開発環境すべてにおいて共通となる設定を記述 #
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -10,6 +12,11 @@ module ChatApp2
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+
+    # 設定ファイルで時刻を日本時刻に変更→その後メソッドを用いて時刻を表示
+    # config/localesディレクトリに「ja.yml」を参照しに行ってる
+    config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
