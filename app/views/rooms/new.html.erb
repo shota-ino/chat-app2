@@ -17,6 +17,24 @@
         <label class='chat-room-form__label' for='chat_room_チャットメンバー'>チャットメンバー</label>
       </div>
       <div class='chat-room-form__field--right'>
+        <%# select要素とoption要素を用いて、プルダウンの実装 %>
+        <%# <select> %>
+        <%# select要素のname属性にroom[user_ids][]を指定し、option要素のvalue属性にuser.idを指定 %>
+          <%# カリキュラム4711の『コントローラーへ送る値を指定しましょう』を参照 %>
+        <select name="room[user_ids][]">
+          <option value="">チャットするユーザーを選択してください</option>
+          <%# DBに管理されているユーザーすべてのレコードをUserクラスから取得して、それぞれ1つずつユーザー名を表示させる実装 %>
+          <%# <% User.all.each do |user| %> 
+          <%# 現在ログインしているユーザーをeachメソッドの処理から取り除く %>
+            <%# モデル名.where.not("条件")は、条件に一致したレコード以外の値を配列として取得 %>
+          <% User.where.not(id: current_user.id).each do |user| %>
+            <%# <option><%= user.name %>
+            <option value=<%= user.id %>><%= user.name %></option>
+          <% end %>
+        </select>
+        <%# 現在ログイン中のユーザーが持つidをparamsに含めることができる %>
+          <%# <%# カリキュラム4711の『コントローラーへ送る値を指定しましょう』を参照 %> %>
+        <input name="room[user_ids][]" type="hidden" value=<%= current_user.id %>>
       </div>
     </div>
     <div class='chat-room-form__field'>
