@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   get 'messages/index'
   # ルートパスへのアクセスがあったら、messages_controllerのindexアクションが呼び出される
   root to: "messages#index"
+  # ユーザー編集に必要なルーティング
+  resources :users, only: [:edit, :update]
 end
