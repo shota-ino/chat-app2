@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root to: "messages#index"
   # ユーザー編集に必要なルーティング
   resources :users, only: [:edit, :update]
+  # 新規チャットルームの作成で動くアクションは「new」と「create」のみ
+  resources :rooms, only: [:new, :create]
 end

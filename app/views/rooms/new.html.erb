@@ -1,5 +1,6 @@
 <div class='chat-room-form'>
   <h1>新規チャットルーム</h1>
+  <%# コントローラーで@roomを定義しますが、値にはRoomモデルの空のインスタンスを代入 %>
   <%=form_with model: @room, local: true do |f|%>
     <div class='chat-room-form__field'>
       <div class='chat-room-form__field--left'>
