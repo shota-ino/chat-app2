@@ -12,5 +12,10 @@ Rails.application.routes.draw do
   # ユーザー編集に必要なルーティング
   resources :users, only: [:edit, :update]
   # 新規チャットルームの作成で動くアクションは「new」と「create」のみ
-  resources :rooms, only: [:new, :create]
+  # resources :rooms, only: [:new, :create]
+
+  # チャットルームに属しているメッセージ（ルーティングのネスト）
+  resources :rooms, only: [:new, :create, :destroy] do
+    resources :messages, only: [:index, :create]
+  end
 end

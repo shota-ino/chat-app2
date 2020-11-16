@@ -3,50 +3,42 @@
 <div class="chat-header">
   <div class="left-header">
     <div class="header-title">
-      hogefuga
+      <%# hogefuga %>
+      <%# すでにコントローラーの@roomで取得できているためこれだけ %>
+      <%= @room.name %>
     </div>
   </div>
   <div class="right-header">
     <div class="header-button">
-      <a href="#">チャットを終了する</a>
+      <%# <a href="#">チャットを終了する</a> %>
+      <%# "チャットを終了する"をクリックすると、チャットルームが削除されるようにリンクを設定 %>
+        <%# rails routes  roomsコントローラーのdestroyアクションに対応するPrefixは、room %>
+          <%# したがって、削除のパスはroom_path  削除するチャットルームを区別するために@roomを引数に設定 %>
+      <%= link_to "チャットを終了する", room_path(@room), method: :delete %>
     </div>
   </div>
 </div>
 
 <%# 4 %>
 <div class="messages">
-  <div class="message">
-    <div class="upper-message">
-      <div class="message-user">
-        Tom
-      </div>
-      <div class="message-date">
-        2020/3/31(Wed) 12:43:30
-      </div>
-    </div>
-    <div class="lower-message">
-      <div class="message-content">
-        おはよう
-      </div>
-    </div>
-  </div>
-<%# 4 %>
-  <div class="message">
-    <div class="upper-message">
-      <div class="message-user">
-        Tom
-      </div>
-      <div class="message-date">
-        2020/3/31(Wed) 12:47:30
-      </div>
-    </div>
-    <div class="lower-message">
-      <div class="message-content">
-        こんばんは
-      </div>
-    </div>
-  </div>
+  <%# _message.html.erbを部分テンプレートとして、読み込む %>
+    <%# @messegesの中にある複数の要素を繰り返し表示 %>
+    <%# collectionオプションを使えば、インスタンスに入っている要素が複数あったときでも、eachメソッドを使用せずにrenderで繰り返し表示できる %>
+  <%= render partial: 'message', collection: @messages %>
 </div>
+
+<%# form_withの引数に@room, @messageの2つを渡している %>
+  <%# messagesのルーティングがroomsにネストされているため %>
+<%= form_with model: [@room, @message], class: 'form', local: true do |f| %>
+  <div class="form-input">
+    <%= f.text_field :content, class: 'form-message', placeholder: 'type a message' %>
+    <label class="form-image">
+      <span class="image-file">画像</span>
+      <%= f.file_field :image, class: 'hidden' %>
+    </label>
+  </div>
+  <%= f.submit '送信', class: 'form-submit' %>
+<% end %>
 
 <%# 5 %>
 <div class="form">
